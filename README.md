@@ -3,7 +3,7 @@
 ## Structure
 `lib/`: Implementation for pruning strategies
 
-`eval/`: Implementation for Evaluating sequential and parallel test-time scaling
+`eval/`: Implementation for evaluating sequential and parallel test-time scaling
 
 `train/`: Implementation for LoRA fine-tuning and Full fine-tuning
 
