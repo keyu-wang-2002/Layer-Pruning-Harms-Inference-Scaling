@@ -2,7 +2,9 @@
 
 export OPENAI_KEY=""
 export OPENAI_API_KEY="$OPENAI_KEY"
-
+export PROCESSOR="gpt-4o-mini"
+# export ZHIPU_API_KEY=""
+# export PROCESSOR="GLM-4.5-Flash"
 
 PRUNE_LAYERS=(1 2)
 
@@ -23,7 +25,7 @@ for PRUNE in "${PRUNE_LAYERS[@]}"; do
         OUTPUT_PATH="${OUTPUT_PATH_BASE}/seed${SEED}"
         mkdir -p "$OUTPUT_PATH"
 
-        PROCESSOR=gpt-4o-mini lm_eval \
+        PROCESSOR="$PROCESSOR" lm_eval \
           --model vllm \
           --model_args pretrained="${MODEL_PATH}",dtype=bfloat16,tensor_parallel_size=1 \
           --tasks $TASK \
@@ -31,7 +33,7 @@ for PRUNE in "${PRUNE_LAYERS[@]}"; do
           --apply_chat_template \
           --output_path "$OUTPUT_PATH" \
           --log_samples \
-          --gen_kwargs "temperature=1.0,seed=${SEED},max_gen_toks=32768,max_tokens_thinking=${TOK}"
+          --gen_kwargs "temperature=1.0,seed=${SEED},max_gen_toks=32768"
     done
   done
 done
