@@ -1,5 +1,12 @@
 # Layer-Pruning-Harms-Inference-Scaling
 
+## Structure
+`lib/`: Prune Strategies
+`eval/`: Evaluation scripts
+`train/`: Scripts to fine-tune models
+`analysis/`: Scripts to analyse model output
+`main.py`: Script for pruning and saving models
+
 ## Install
 ```
 conda create -n layerpruning python==3.10 -y
