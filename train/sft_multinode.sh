@@ -21,7 +21,7 @@ train/sft.py \
 --per_device_train_batch_size=${micro_batch_size} \
 --per_device_eval_batch_size=${micro_batch_size} \
 --gradient_accumulation_steps=${gradient_accumulation_steps} \
---train_file_path="simplescaling/s1K_tokenized" \
+--train_file_path="" \
 --block_size=32768 \
 --model_name=${base_model} \
 --warmup_ratio=0.05 \
