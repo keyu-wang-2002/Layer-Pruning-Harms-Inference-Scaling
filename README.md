@@ -9,8 +9,8 @@ pip install -e lm-evaluation-harness/
 ```
 
 ## Usage
-### Prune/Merge Methods
-#### ShortGPT Prune
+### Prune Methods
+#### ShortGPT Pruning
 ```
 python main.py \
     --model Qwen/Qwen3-8B \
