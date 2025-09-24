@@ -5,16 +5,10 @@ import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from importlib.metadata import version
 from typing import List, Dict, Any
-from lib.prune import  prune_shortgpt, prune_random, prune_tail, prune_magnitude_l1, prune_magnitude_l2, prune_ppl, prune_taylor, prune_selection
+from lib.prune import prune_shortgpt, prune_random, prune_tail, prune_magnitude_l1, prune_magnitude_l2, prune_ppl, prune_taylor, prune_selection
 from lib.merge import merge_laco
-from lib.eval import eval_ppl_wikitext2, eval_arc_easy
-from lib.eval import eval_gsm8k_cot_8_shot, eval_math500_cot_8_shot, eval_gpqa_diamond_cot_5_shot
-from lib.eval import eval_bbh_cot_3_shot_logical_deduction_3_objects, eval_bbh_cot_3_shot_logical_deduction_5_objects, eval_bbh_cot_3_shot_logical_deduction_7_objects
-from lib.eval import eval_gpqa_diamond_zeroshot, eval_gpqa_diamond_n_shot, eval_gpqa_diamond_cot_zeroshot, eval_gpqa_diamond_cot_n_shot
 from lib.data import laco_sampled_text, shortgpt_sampled_text, get_c4, get_bookcorpus
 import random
-import json
-import time
 
 print('torch', version('torch'))
 print('transformers', version('transformers'))
@@ -58,9 +52,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--model', type=str, help='LLaMA model')
     parser.add_argument('--seed', type=int, default=0, help='Seed for sampling the calibration data.')
-    parser.add_argument("--prune_method", type=str, default="origin", choices=["origin", "laco", "shortgpt", "random", "tail", "magnitude_l1", "magnitude_l2", "ppl", "taylor", "selection"])
+    parser.add_argument("--prune_method", type=str, default="shortgpt", choices=["laco", "shortgpt", "tail", "selection"])
     parser.add_argument("--cache_dir", default="llm_weights", type=str)
-    parser.add_argument('--save', type=str, default=None, help='Path to save results.')
     parser.add_argument('--save_model', type=str, default=None, help='Path to save the pruned model.')
 
     parser.add_argument('--laco_interval', type=int, default=1, help='laco interval')
@@ -85,7 +78,6 @@ def main():
 
     args = parser.parse_args()
 
-    # Setting seeds for reproducibility
     random.seed(args.seed)
     np.random.seed(args.seed)
     torch.manual_seed(args.seed)
@@ -114,24 +106,11 @@ def main():
     else:
         raise NotImplementedError
 
-    if args.prune_method == "origin":
-        compressed_model = model
-    elif args.prune_method == "random":
-        compressed_model = prune_random(args, model, tokenizer, device)
-    elif args.prune_method == "tail":
+    if args.prune_method == "tail":
         compressed_model = prune_tail(args, model, tokenizer, device)
-    elif args.prune_method == "magnitude_l1":
-        compressed_model = prune_magnitude_l1(args, model, tokenizer, device)
-    elif args.prune_method == "magnitude_l2":
-        compressed_model = prune_magnitude_l2(args, model, tokenizer, device)
-    elif args.prune_method == "taylor":
-        compressed_model = prune_taylor(args, model, tokenizer, text, device)    
-    elif args.prune_method == "ppl":
-        compressed_model = prune_ppl(args, model, tokenizer, text, device)
     elif args.prune_method == "shortgpt":
         compressed_model = prune_shortgpt(args, model, tokenizer, text, device)
     elif args.prune_method == "laco":
-        text = laco_sampled_text
         compressed_model = merge_laco(args, model, tokenizer, text, device)
     elif args.prune_method == "selection":
         compressed_model = prune_selection(args, model, tokenizer, device)    
@@ -139,43 +118,11 @@ def main():
         raise NotImplementedError
     
     print("# of layers of the compressed model: " + str(len(compressed_model.model.layers)))
-    
-    ppl_test = eval_ppl_wikitext2(args, compressed_model, tokenizer, device)
-    print(f"wikitext2 perplexity {ppl_test}")
-
-    arc_easy_results = eval_arc_easy(args, compressed_model, tokenizer, device)
-
-    gsm8k_cot_8_shot_results = eval_gsm8k_cot_8_shot(args, compressed_model, tokenizer, device)
-    math500_cot_8_shot_results = eval_math500_cot_8_shot(args, compressed_model, tokenizer, device)
-    gpqa_diamond_cot_5_shot_results = eval_gpqa_diamond_cot_5_shot(args, compressed_model, tokenizer, device)
-    bbh_cot_3_shot_logical_deduction_3_objects_results = eval_bbh_cot_3_shot_logical_deduction_3_objects(args, compressed_model, tokenizer, device)
-    bbh_cot_3_shot_logical_deduction_5_objects_results = eval_bbh_cot_3_shot_logical_deduction_5_objects(args, compressed_model, tokenizer, device)
-    bbh_cot_3_shot_logical_deduction_7_objects_results = eval_bbh_cot_3_shot_logical_deduction_7_objects(args, compressed_model, tokenizer, device)
-
-
-    zero_shot_results = merge_zero_shot_results([arc_easy_results, gsm8k_cot_8_shot_results, math500_cot_8_shot_results, gpqa_diamond_cot_5_shot_results, bbh_cot_3_shot_logical_deduction_3_objects_results, bbh_cot_3_shot_logical_deduction_5_objects_results, bbh_cot_3_shot_logical_deduction_7_objects_results])
-    print(f"zero shot evaluation {zero_shot_results}")
-
-
-    path = os.path.join(args.save, f"{model_name}")
-    if not os.path.exists(path):
-        os.makedirs(path)
-        
-    save_filepath_ppl = os.path.join(path, f"{args.prune_method}_ppl.txt")
-    save_filepath_zero_shot = os.path.join(path, f"{args.prune_method}_zero_shot.json")
-
-    with open(save_filepath_ppl, "w") as f:
-        print("method\tppl_test", file=f, flush=True)
-        print(f"{args.prune_method}\t{ppl_test:.4f}", file=f, flush=True)
-
-    with open(save_filepath_zero_shot, "w", encoding="utf-8") as f:
-        json.dump(zero_shot_results, f, ensure_ascii=False, indent=4)
 
     if args.save_model:
-        model.save_pretrained(args.save_model)
+        compressed_model.save_pretrained(args.save_model)
         tokenizer.save_pretrained(args.save_model)
 
-    print("\n\n")
 
 if __name__ == '__main__':
     main()

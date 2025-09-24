@@ -88,7 +88,7 @@ def shortgpt_sampled_text(max_samples=10000, max_length=1024):
         gs_response = requests.get(BASE_URL, timeout=10)
         gs_response.raise_for_status()
 
-        soup = BeautifulSoup(gs_response.content, 'xml')
+        soup = BeautifulSoup(gs_response.content, 'lxml')
         gs_files = [
             content.Key.text 
             for content in soup.find_all('Contents') 
