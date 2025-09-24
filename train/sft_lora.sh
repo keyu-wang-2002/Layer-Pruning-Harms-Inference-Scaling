@@ -1,20 +1,7 @@
 #!/bin/bash
-#SBATCH --job-name=s1_train
-#SBATCH --output=train_s1_2.out
-#SBATCH --error=train_s1_2.err
-#SBATCH --nodes=1
-#SBATCH --ntasks-per-node=1
-#SBATCH --mem=80G
-#SBATCH --partition=a100
-#SBATCH --gpus=1
-#SBATCH --time=00-20:00:00
 
-# activate conda env
-source /mnt/fast/nobackup/users/ly0008/miniconda3/etc/profile.d/conda.sh
-conda activate s1
-
-output="/mnt/fast/nobackup/scratch4weeks/ly0008/wangkeyu/s1/output_models/s1.1-7B-LaCo-merge-1-layer-sft-lora"
-base_model="MrLvTian/s1.1-7B-LaCo-merge-1-layer"
+output=""
+base_model=""
 lr=1e-5
 min_lr=0
 epochs=5
