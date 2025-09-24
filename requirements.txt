@@ -1,0 +1,10 @@
+tqdm
+scikit-learn
+numpy
+lm-eval
+bs4
+math
+peft
+lxml
+packaging
+accelerate
