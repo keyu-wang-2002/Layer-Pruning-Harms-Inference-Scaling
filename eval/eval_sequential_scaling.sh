@@ -2,6 +2,9 @@
 
 export OPENAI_KEY=""
 export OPENAI_API_KEY="$OPENAI_KEY"
+export PROCESSOR="gpt-4o-mini"
+# export ZHIPU_API_KEY=""
+# export PROCESSOR="GLM-4.5-Flash"
 
 TOKENS=(512 1024 2048 4096 8192)
 
@@ -27,7 +30,7 @@ for PRUNE in "${PRUNE_LAYERS[@]}"; do
         OUTPUT_PATH="${OUTPUT_PATH_BASE}/seed${SEED}"
         mkdir -p "$OUTPUT_PATH"
 
-        PROCESSOR=gpt-4o-mini lm_eval \
+        PROCESSOR="$PROCESSOR" lm_eval \
           --model vllm \
           --model_args pretrained="${MODEL_PATH}",dtype=bfloat16,tensor_parallel_size=1 \
           --tasks $TASK \
