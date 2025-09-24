@@ -1,11 +1,11 @@
 # Layer-Pruning-Harms-Inference-Scaling
 
 ## Structure
-`lib/`: Prune Strategies
+`lib/`: Implementation for pruning strategies
 
-`eval/`: Evaluation scripts
+`eval/`: Implementation for Evaluating sequential and parallel test-time scaling
 
-`train/`: Scripts to fine-tune models
+`train/`: Implementation for LoRA fine-tuning and Full fine-tuning
 
 `analysis/`: Scripts to analyse model output
 
@@ -20,7 +20,7 @@ pip install -e eval/lm-evaluation-harness/
 ```
 
 ## Usage
-### Prune Methods
+### Pruning
 #### ShortGPT Pruning
 ```
 python main.py \
@@ -64,7 +64,14 @@ python main.py \
     --layers_to_remove 25 27 26
 ```
 
-### Analyse Output
+### Evaluation
+Input the model path and output path in ./eval/eval_sequential_scaling.sh and ./eval/eval_parallel_scaling.sh
+```
+sh ./eval/eval_sequential_scaling.sh
+sh ./eval/eval_parallel_scaling.sh
+```
+
+### Analysis
 We provide an example sampled from output of `s1.1-7B` model on `AIME24` dataset.
 To run analyse on diversity, just use:
 ```
