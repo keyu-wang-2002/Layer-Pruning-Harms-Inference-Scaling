@@ -12,7 +12,7 @@
 conda create -n layerpruning python==3.10 -y
 conda activate layerpruning
 pip install -r requirements.txt
-pip install -e lm-evaluation-harness/
+pip install -e eval/lm-evaluation-harness/
 ```
 
 ## Usage
@@ -64,9 +64,9 @@ python main.py \
 We provide an example sampled from output of `s1.1-7B` model on `AIME24` dataset.
 To run analyse on diversity, just use:
 ```
-python diversity.py --jsonl_path ./example/s1.1-7B_aime24.jsonl
+python ./analysis/diversity.py --jsonl_path ./analysis/example/s1.1-7B_aime24.jsonl
 ```
 To run analyse on self-reflection, use:
 ```
-python self_reflection.py --jsonl_path ./example/s1.1-7B_aime24.jsonl --max_samples 200
+python ./analysis/self_reflection.py --jsonl_path ./analysis/example/s1.1-7B_aime24.jsonl --max_samples 200
 ```
