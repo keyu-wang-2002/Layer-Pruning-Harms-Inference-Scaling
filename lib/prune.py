@@ -15,14 +15,10 @@ from transformers import AutoConfig, AutoModelForCausalLM
 
 
 def disable_kv_cache(model):
-    # 1) 公有接口
     model.config.use_cache = False
-    # 2) 私有变量
     model._use_cache = False
-    # 3) generation_config（transformers==4.29+）
     if hasattr(model, "generation_config"):
         model.generation_config.use_cache = False
-    # 4) Monkey‐patch generate/forward，彻底抹掉 past_key_values
     import types
     orig_generate = model.generate
     def no_cache_generate(self, *args, **kwargs):
