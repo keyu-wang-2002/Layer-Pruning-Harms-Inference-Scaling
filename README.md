@@ -6,11 +6,13 @@
   </a>
 </p>
 
-This repo contains the official code of **Layer Pruning Harms Test-Time Scaling**, which has been accepted by **COLM 2026**
+This repo contains the official codebase of **Layer Pruning Harms Test-Time Scaling**, which has been accepted by **COLM 2026**
 
-Layer pruning boosts LLM efficiency but its impact on long-chain reasoning is unexplored. Ignoring this can falsely suggest "lossless" pruning while causing severe reasoning failures.
+Layer pruning boosts LLM efficiency but its impact on long-chain reasoning is unexplored. Ignoring this can falsely suggest "lossless" pruning while causing severe reasoning failures:
 
-
+<div align="center">
+  <img src="./figs/intro_fig.png" alt="Image 2" style="width: 750px; margin: 0 auto;">
+</div>
 
 ## Structure
 ```
