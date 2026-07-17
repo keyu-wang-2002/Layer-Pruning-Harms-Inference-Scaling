@@ -2,16 +2,11 @@
 
 ## Structure
 ```
-├── lib/
-│   └── Implementation for pruning strategies
-├── eval/
-│   └── Implementation for evaluating sequential and parallel test-time scaling
-├── train/
-│   └── Implementation for LoRA fine-tuning and Full fine-tuning
-├── analysis/
-│   └── Scripts to analyse model output
-└── main.py
-    └── Script for pruning and saving models
+├── lib/                     # Pruning strategies implementation
+├── eval/                    # Sequential & parallel test-time scaling evaluation
+├── train/                   # LoRA and Full fine-tuning implementation
+├── analysis/                # Model output analysis scripts
+└── main.py                  # Pruning and model saving entry point
 ```
 
 ## Install
