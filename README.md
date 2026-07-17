@@ -14,14 +14,12 @@ Layer pruning boosts LLM efficiency but its impact on long-chain reasoning is un
   <img src="./figs/intro_fig.png" alt="Image 2" style="width: 750px; margin: 0 auto;">
 </div>
 
-Layer pruning severely undermines sequential and parallel test-time scaling for long-chain reasoning — even removing 1–2 layers causes drastic performance drops on reasoning benchmarks:
+Layer pruning severely undermines test-time scaling for long-chain reasoning — even removing 1–2 layers causes drastic performance drops on reasoning benchmarks:
 
 <div align="center">
   <img src="./figs/seq_scaling.png" alt="Image 2" style="width: 750px; margin: 0 auto;">
 </div>
-<div align="center">
-  <img src="./figs/par_scaling.png" alt="Image 2" style="width: 750px; margin: 0 auto;">
-</div>
+
 
 Our analysis reveals that supervised fine-tuning cannot restore pruned models' lost test-time scaling and why scaling is fragile, challenging "lossless pruning" claims and urging careful evaluation before deploying pruned LLMs for reasoning tasks.
 
