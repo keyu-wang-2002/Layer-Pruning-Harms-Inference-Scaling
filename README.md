@@ -79,3 +79,15 @@ To run analyse on self-reflection, use:
 ```
 python ./analysis/self_reflection.py --jsonl_path ./analysis/example/s1.1-7B_aime24.jsonl --max_samples 200
 ```
+
+## Citation
+```
+@inproceedings{wang2025fewer,
+  title={When Fewer Layers Break More Chains: Layer Pruning Harms Test-Time Scaling in LLMs},
+  author={Wang, Keyu and Lyu, Tianqi and Su, Guancheng and others},
+  booktitle={Proceedings of the Conference on Language Modeling (COLM)},
+  year={2026},
+  address={San Francisco, CA},
+  month={October}
+}
+```
