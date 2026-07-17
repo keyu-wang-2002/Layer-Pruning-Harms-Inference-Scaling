@@ -116,3 +116,6 @@ python ./analysis/self_reflection.py --jsonl_path ./analysis/example/s1.1-7B_aim
   month={October}
 }
 ```
+
+## Acknowledgement
+This repository is build upon the [Wanda](https://github.com/locuslab/wanda), [lm-eval-harness](https://github.com/EleutherAI/lm-evaluation-harness) and [s1](https://github.com/simplescaling/s1) repositories. Thanks for their great work!
