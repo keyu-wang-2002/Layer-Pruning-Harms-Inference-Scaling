@@ -1,4 +1,4 @@
-# Layer-Pruning-Harms-Inference-Scaling
+# When Fewer Layers Break More Chains: Layer Pruning Harms Test-Time Scaling in LLMs
 
 ## Structure
 ```
