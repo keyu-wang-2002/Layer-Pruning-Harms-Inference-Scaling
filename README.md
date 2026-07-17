@@ -21,7 +21,7 @@ Layer pruning severely undermines test-time scaling for long-chain reasoning —
 </div>
 
 
-Our analysis reveals that supervised fine-tuning cannot restore pruned models' lost test-time scaling and why such scaling and reasoning capacity is fragile under layer pruning, challenging "lossless pruning" claims and urging careful evaluation before deploying pruned LLMs for reasoning tasks.
+Our analysis reveals that  why such scaling and reasoning capacity is fragile under layer pruning and supervised fine-tuning cannot restore pruned models' lost test-time scaling, challenging "lossless pruning" claims and urging careful evaluation before deploying pruned LLMs for reasoning tasks.
 
 
 
