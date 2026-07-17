@@ -1,6 +1,7 @@
 # Layer-Pruning-Harms-Inference-Scaling
 
 ## Structure
+```
 ├── lib/
 │   └── Implementation for pruning strategies
 ├── eval/
@@ -11,6 +12,7 @@
 │   └── Scripts to analyse model output
 └── main.py
     └── Script for pruning and saving models
+```
 
 ## Install
 ```
