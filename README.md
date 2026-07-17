@@ -1,15 +1,16 @@
 # Layer-Pruning-Harms-Inference-Scaling
 
 ## Structure
-`lib/`: Implementation for pruning strategies
-
-`eval/`: Implementation for evaluating sequential and parallel test-time scaling
-
-`train/`: Implementation for LoRA fine-tuning and Full fine-tuning
-
-`analysis/`: Scripts to analyse model output
-
-`main.py`: Script for pruning and saving models
+├── lib/
+│   └── Implementation for pruning strategies
+├── eval/
+│   └── Implementation for evaluating sequential and parallel test-time scaling
+├── train/
+│   └── Implementation for LoRA fine-tuning and Full fine-tuning
+├── analysis/
+│   └── Scripts to analyse model output
+└── main.py
+    └── Script for pruning and saving models
 
 ## Install
 ```
