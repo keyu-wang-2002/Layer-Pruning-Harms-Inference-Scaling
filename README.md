@@ -1,5 +1,17 @@
 # When Fewer Layers Break More Chains: Layer Pruning Harms Test-Time Scaling in LLMs
 
+<p align="center">
+  <a href="https://arxiv.org/pdf/2510.22228">
+    <img src="https://img.shields.io/badge/Arxiv-Paper-b31b1b?style=for-the-badge&logo=arxiv&logoColor=white" alt="Arxiv">
+  </a>
+</p>
+
+This repo contains the official code of **Layer Pruning Harms Test-Time Scaling**, which has been accepted by **COLM 2026**
+
+Layer pruning boosts LLM efficiency but its impact on long-chain reasoning is unexplored. Ignoring this can falsely suggest "lossless" pruning while causing severe reasoning failures.
+
+
+
 ## Structure
 ```
 ├── lib/                     # Pruning strategies implementation
