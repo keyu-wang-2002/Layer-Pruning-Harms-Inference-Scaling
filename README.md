@@ -109,7 +109,7 @@ python ./analysis/self_reflection.py --jsonl_path ./analysis/example/s1.1-7B_aim
 ```
 @inproceedings{wang2025fewer,
   title={When Fewer Layers Break More Chains: Layer Pruning Harms Test-Time Scaling in LLMs},
-  author={Wang, Keyu and Lyu, Tianqi and Su, Guancheng and others},
+  author={Wang, Keyu and Lyu, Tian and Su, Guinan and Geiping, Jonas and Yin, Lu and Canini, Marco and Liu, Shiwei},
   booktitle={Proceedings of the Conference on Language Modeling (COLM)},
   year={2026},
   address={San Francisco, CA},
