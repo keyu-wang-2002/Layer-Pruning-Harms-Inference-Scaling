@@ -94,6 +94,14 @@ sh ./eval/eval_sequential_scaling.sh
 sh ./eval/eval_parallel_scaling.sh
 ```
 
+### Train
+
+Input the model path and data path in ./train/sft.sh and ./train/sft_lora.sh
+```
+sh ./train/sft.sh
+sh ./train/sft_lora.sh
+```
+
 ### Analysis
 We provide an example sampled from output of `s1.1-7B` model on `AIME24` dataset.
 To run analyse on diversity, just use:
